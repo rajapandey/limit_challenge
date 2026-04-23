@@ -1,6 +1,8 @@
 from django.db.models import Count, OuterRef, Subquery
+from django.http import JsonResponse
 from rest_framework import viewsets
-
+from rest_framework.decorators import api_view
+from django.utils import timezone
 from submissions import models, serializers
 from submissions.filters.submission import SubmissionFilterSet
 
@@ -33,4 +35,12 @@ class SubmissionViewSet(viewsets.ReadOnlyModelViewSet):
 class BrokerViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = models.Broker.objects.all()
     serializer_class = serializers.BrokerSerializer
+
+
+@api_view(['GET'])
+def health_check(request):
+    return JsonResponse({
+        "status": "ok",
+        "timestamp": timezone.now().isoformat()
+    })
 

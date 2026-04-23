@@ -81,7 +81,28 @@ export interface PaginatedResponse<T> {
 }
 
 export interface SubmissionListFilters {
-  status?: SubmissionStatus;
-  brokerId?: string;
-  companySearch?: string;
+  status?: string;
+  broker_id?: string;
+  company_search?: string;
+  page?: string;
+  created_from?: string;
+  created_to?: string;
+  has_documents?: boolean;
+  has_notes?: boolean;
+  [key: string]: any;
+}
+
+export interface FilterUpdate {
+  status?: string;
+  broker_id?: string;
+  company_search?: string;
+  page?: string;
+  created_from?: string;
+  created_to?: string;
+  has_documents?: string;
+  has_notes?: string;
+}
+
+export interface SubmissionCardProps {
+  submission: any;
 }

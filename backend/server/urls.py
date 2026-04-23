@@ -17,8 +17,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 from rest_framework.routers import DefaultRouter
-
-from submissions.views import BrokerViewSet, SubmissionViewSet
+from submissions.views import BrokerViewSet, SubmissionViewSet, health_check
+from rest_framework.authtoken import views as auth_views
 
 router = DefaultRouter()
 router.register("submissions", SubmissionViewSet, basename="submission")
@@ -27,4 +27,7 @@ router.register("brokers", BrokerViewSet, basename="broker")
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
+    path('api/health/', health_check),
+    path('api/auth/', include('rest_framework.urls')),
+    path('api/auth/token/', auth_views.obtain_auth_token),
 ]

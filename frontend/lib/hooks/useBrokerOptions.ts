@@ -6,14 +6,15 @@ import { apiClient } from '@/lib/api-client';
 import { Broker } from '@/lib/types';
 
 async function fetchBrokers() {
-  const response = await apiClient.get<Broker[]>('/brokers/');
-  return response.data;
+  const response = await apiClient.get<{ results: Broker[] }>('/brokers/');
+  return response.data.results;
 }
 
 export function useBrokerOptions() {
   return useQuery({
     queryKey: ['brokers'],
     queryFn: fetchBrokers,
-    enabled: false,
+    enabled: true,
+    staleTime: 5 * 60 * 1000,
   });
 }
