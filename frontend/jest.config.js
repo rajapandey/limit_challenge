@@ -6,4 +6,7 @@ const createJestConfig = nextJest({
 
 module.exports = createJestConfig({
   testEnvironment: 'jest-environment-jsdom',
+  moduleNameMapper: {
+    '^@/(.*)$': '<rootDir>/$1',
+  },
 })
