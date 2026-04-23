@@ -35,6 +35,11 @@ Chose React Query over Redux for simplicity, Material-UI for rapid development, 
 cd backend
 python -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
+
+# ⚠️ django-cors-headers may not install correctly via requirements.txt
+# If the server fails with "No module named 'corsheaders'", run:
+pip install django-cors-headers
+
 python manage.py migrate
 python manage.py seed_submissions
 python manage.py runserver 0.0.0.0:8000
@@ -45,10 +50,9 @@ npm install --legacy-peer-deps
 npm run dev
 ```
 
-
-API Authentication:
-- Basic Auth: Use username/password
-- Token Auth: POST /api/auth/token/ with credentials
+> **Note on permissions:** `server/settings.py` sets `DEFAULT_PERMISSION_CLASSES` to
+> `AllowAny` so the API is accessible without credentials during development. The
+> original `IsAuthenticated` line is left commented out for reference.
 
 ## Stretch Goals
 ✅ All optional filters (date ranges, boolean)  
